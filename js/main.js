@@ -15,7 +15,7 @@ var webrtc = new SimpleWebRTC({
 
 console.log(webrtc);
 
-// when it's ready, join if we got a room from the URL
+//when it's ready, join if we got a room from the URL
 webrtc.on('readyToCall', function () {
     // you can name it anything
     if (room) webrtc.joinRoom(room);
@@ -79,21 +79,33 @@ function setRoom(name) {
 if (room) {
     setRoom(room);
 } else {
-    $('form').submit(function () {
-        var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
-        webrtc.createRoom(val, function (err, name) {
-            console.log(' create room cb', arguments);
+    var val = "PracticeRoom#1"
+    webrtc.createRoom(val, function (err, name) {
+        console.log(' create room cb', arguments);
 
-            var newUrl = location.pathname + '?' + name;
-            if (!err) {
-                history.replaceState({foo: 'bar'}, null, newUrl);
-                setRoom(name);
-            } else {
-                console.log(err);
-            }
-        });
-        return false;
+        var newUrl = location.pathname + '?' + name;
+        if (!err) {
+            history.replaceState({foo: 'bar'}, null, newUrl);
+            setRoom(name);
+        } else {
+            console.log(err);
+        }
     });
+    // $('form').submit(function () {
+    //     var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
+    //     webrtc.createRoom(val, function (err, name) {
+    //         console.log(' create room cb', arguments);
+
+    //         var newUrl = location.pathname + '?' + name;
+    //         if (!err) {
+    //             history.replaceState({foo: 'bar'}, null, newUrl);
+    //             setRoom(name);
+    //         } else {
+    //             console.log(err);
+    //         }
+    //     });
+    //     return false;
+    // });
 }
 
 var button = $('#screenShareButton'),
