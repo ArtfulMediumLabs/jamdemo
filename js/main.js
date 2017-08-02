@@ -1,6 +1,7 @@
 // grab the room from the URL
 // var room = location.search && location.search.split('?')[1];
-var room = 'Practice Room';
+var room = 'Practice Room #1';
+$('#title').text(room);
 
 // create our webrtc connection
 var webrtc = new SimpleWebRTC({
@@ -70,12 +71,12 @@ webrtc.on('volumeChange', function (volume, treshold) {
 });
 
 // Since we use this twice we put it here
-function setRoom(name) {
-    $('form').remove();
-    $('h1').text(room);
-    $('#subTitle').html('Link to join: <a href="' + location.href + '">' + location.href + '</a>');
-    $('body').addClass('active');
-}
+// function setRoom(name) {
+//     $('form').remove();
+//     $('#title').text(room);
+//     $('#subTitle').html('Link to join: <a href="' + location.href + '">' + location.href + '</a>');
+//     $('body').addClass('active');
+// }
 
 // if (room) {
 //     setRoom(room);
