@@ -1,5 +1,6 @@
 // grab the room from the URL
-var room = location.search && location.search.split('?')[1];
+// var room = location.search && location.search.split('?')[1];
+var room = 'Practice Room';
 
 // create our webrtc connection
 var webrtc = new SimpleWebRTC({
@@ -71,42 +72,30 @@ webrtc.on('volumeChange', function (volume, treshold) {
 // Since we use this twice we put it here
 function setRoom(name) {
     $('form').remove();
-    $('h1').text(name);
+    $('h1').text(room);
     $('#subTitle').html('Link to join: <a href="' + location.href + '">' + location.href + '</a>');
     $('body').addClass('active');
 }
 
-if (room) {
-    setRoom(room);
-} else {
-    var val = "PracticeRoom#1"
-    webrtc.createRoom(val, function (err, name) {
-        console.log(' create room cb', arguments);
+// if (room) {
+//     setRoom(room);
+// } else {
+//     // $('form').submit(function () {
+//     //     var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
+//     //     webrtc.createRoom(val, function (err, name) {
+//     //         console.log(' create room cb', arguments);
 
-        var newUrl = location.pathname + '?' + name;
-        if (!err) {
-            history.replaceState({foo: 'bar'}, null, newUrl);
-            setRoom(name);
-        } else {
-            console.log(err);
-        }
-    });
-    // $('form').submit(function () {
-    //     var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
-    //     webrtc.createRoom(val, function (err, name) {
-    //         console.log(' create room cb', arguments);
-
-    //         var newUrl = location.pathname + '?' + name;
-    //         if (!err) {
-    //             history.replaceState({foo: 'bar'}, null, newUrl);
-    //             setRoom(name);
-    //         } else {
-    //             console.log(err);
-    //         }
-    //     });
-    //     return false;
-    // });
-}
+//     //         var newUrl = location.pathname + '?' + name;
+//     //         if (!err) {
+//     //             history.replaceState({foo: 'bar'}, null, newUrl);
+//     //             setRoom(name);
+//     //         } else {
+//     //             console.log(err);
+//     //         }
+//     //     });
+//     //     return false;
+//     // });
+// }
 
 var button = $('#screenShareButton'),
     setButton = function (bool) {
